@@ -12,7 +12,7 @@ namespace Web.App_Start
         {
             return createKernel();
         }
-        private IKernel createKernel()
+        private static IKernel createKernel()
         {
             var kernel = new StandardKernel();
             registerServices(kernel);
@@ -20,9 +20,9 @@ namespace Web.App_Start
         }
 
 
-        private void registerServices(IKernel kernel)
+        private static void registerServices(IKernel kernel)
         {
-            kernel.Bind<IMongoDatabase
+           // kernel.Bind<IMongoDatabase
         }
 
     }
