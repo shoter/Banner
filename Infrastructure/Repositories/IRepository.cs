@@ -12,7 +12,7 @@ namespace Infrastructure.Repositories
     {
         void Insert(TModel model);
         void Update(TKey id, TModel model);
-        void Remove(TModel model);
+        void Remove(TKey key);
         TModel FindById(TKey id);
         IFindFluent<TModel, TModel> Where(Expression<Func<TModel, bool>> predicate);
     }

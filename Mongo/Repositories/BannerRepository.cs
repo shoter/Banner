@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mongo.Repositories
 {
-    public class BannerRepository : RepositoryBase<Banner>, IBannerRepository
+    public class BannerRepository : RepositoryBase<Banner, int>, IBannerRepository
     {
         public BannerRepository(IMongoDatabase mongoDatabase)
             :base(mongoDatabase.GetCollection<Banner>("banner"))

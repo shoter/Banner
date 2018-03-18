@@ -22,6 +22,7 @@ namespace Web.App_Start
 
         private void registerServices(IKernel kernel)
         {
+            kernel.Bind<IMongoDatabase
         }
 
     }
