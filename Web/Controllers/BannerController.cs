@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 
 namespace Web.Controllers
 {
-    public class BannerController
+    public class BannerController : ApiController
     {
     }
 }
