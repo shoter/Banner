@@ -12,16 +12,16 @@ namespace Mongo
     {
         //It's advisable to create MongoClient as singleton
         //http://mongodb.github.io/mongo-csharp-driver/2.0/reference/driver/connecting/#re-use
-        public static MongoClient mongoClient { get; private set; }
-        public static IMongoDatabase mongoDatabase { get; private set; }
+        public static MongoClient MongoClient { get; private set; }
+        public static IMongoDatabase MongoDatabase { get; private set; }
         static MongoDatabaseProvider()
         {
-            mongoClient = new MongoClient(System.Configuration.ConfigurationManager.ConnectionStrings["mongoDatabase"].ConnectionString);
-            mongoDatabase = mongoClient.GetDatabase("banner");
+            MongoClient = new MongoClient(System.Configuration.ConfigurationManager.ConnectionStrings["mongoDatabase"].ConnectionString);
+            MongoDatabase = MongoClient.GetDatabase("banner");
         }
         protected override IMongoDatabase CreateInstance(IContext context)
         {
-            return mongoDatabase;
+            return MongoDatabase;
         }
     }
 }
