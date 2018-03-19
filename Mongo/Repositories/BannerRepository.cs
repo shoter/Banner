@@ -15,5 +15,12 @@ namespace Mongo.Repositories
             :base(mongoDatabase.GetCollection<Banner>("banner"))
         {
         }
+
+
+        protected override UpdateDefinition<IdCounter<int>> GetCounterIncrement()
+        {
+            return Builders<IdCounter<int>>.Update
+                .Inc(x => x.Id, 1);
+        }
     }
 }

@@ -60,6 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModels\Banner.cs" />
+    <Compile Include="DataModels\IdCounter.cs" />
+    <Compile Include="DataModels\IEntity.cs" />
+    <Compile Include="DataModels\IKeyedEntity.cs" />
     <Compile Include="Db\Paging\Page.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -17,5 +17,6 @@ namespace Infrastructure.Repositories
         TModel FindById(TKey id);
         IFindFluent<TModel, TModel> Where(Expression<Func<TModel, bool>> predicate);
         Page<TModel> Page(int skipCount, int pageSize);
+        TKey GetNewId();
     }
 }
