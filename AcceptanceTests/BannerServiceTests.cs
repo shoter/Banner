@@ -40,6 +40,14 @@ namespace AcceptanceTests
             Assert.True(response.Created.Ticks - now.Ticks >= -tenMilisecondsTicks);
             Assert.Null(response.Modified);
         }
+        
+        [Fact]
+        public void CreateBanner_invalidHtml_test()
+        {
+            var html = "<p>test</pasdsad>";
+
+            Assert.Throws<Exception>(() => bannerService.CreateBanner(0, html));
+        }
 
         [Fact]
         public void CreateBanner_queryDataAfterInsert_test()
@@ -88,6 +96,14 @@ namespace AcceptanceTests
             Assert.True(data.Modified.Value.Ticks - now.Ticks >= -tenMilisecondsTicks);
             Assert.NotEqual(data.Created, data.Modified);
         }
+
+        [Fact]
+        public void UpdateBanner_invalidHtml_test()
+        {
+            bannerService.CreateBanner(0, "<div>divvvv</div>");
+            Assert.Throws<Exception>(() => bannerService.CreateBanner(0, "<div>asd</asdasd>"));
+        }
+
 
         [Fact]
         public void RemoveBanner_noData_test()
