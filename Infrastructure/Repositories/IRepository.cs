@@ -1,4 +1,5 @@
-﻿using Infrastructure.Db.Paging;
+﻿using Infrastructure.DataModels;
+using Infrastructure.Db.Paging;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace Infrastructure.Repositories
 {
     public interface IRepository<TModel, TKey>
+        where TModel: IEntity
     {
         void Insert(TModel model);
         void Update(TKey id, TModel model);
@@ -17,6 +19,6 @@ namespace Infrastructure.Repositories
         TModel FindById(TKey id);
         IFindFluent<TModel, TModel> Where(Expression<Func<TModel, bool>> predicate);
         Page<TModel> Page(int skipCount, int pageSize);
-        TKey GetNewId();
+        void RemoveAll();
     }
 }

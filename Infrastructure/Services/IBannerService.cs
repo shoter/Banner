@@ -11,7 +11,9 @@ namespace Infrastructure.Services
     public interface IBannerService
     {
         MethodResult ValidateHtml(string html);
-        Banner CreateBanner(string html);
+        Banner CreateBanner(int id, string html);
         Banner UpdateBanner(int id, string html);
+
+        void RemoveBanner(int id);
     }
 }

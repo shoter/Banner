@@ -21,38 +21,38 @@ namespace Web.Controllers
             this.unit = unit;
             this.bannerService = bannerService;
         }
-        public BannerViewModel Get(int id)
+        public BannerModel Get(int id)
         {
             var banner = unit.BannerRepository.FindById(id);
-            return new BannerViewModel(banner);
+            return new BannerModel(banner);
         }
 
-        public BannerPageViewModel Get(int pageNumber, int pageSize)
+        public BannerPageModel Get(int pageNumber, int pageSize)
         {
             var page = unit.BannerRepository.Page( skipCount: pageSize * (pageNumber - 1), pageSize: pageSize);
 
-            return new BannerPageViewModel(page);
+            return new BannerPageModel(page);
         }
 
-        public BannerViewModel Post([FromBody]string html)
+        public BannerModel Post([FromBody]NewBannerModel newBanner)
         {
-            throwExceptionIfInvalidHtml(html);
+            throwExceptionIfInvalidHtml(newBanner.Html);
 
-            var banner = bannerService.CreateBanner(html);
-            return new BannerViewModel(banner);
+            var banner = bannerService.CreateBanner(newBanner.Id, newBanner.Html);
+            return new BannerModel(banner);
         }
 
-        public BannerViewModel Post(int id, [FromBody]string html)
+        public BannerModel Post(int id, [FromBody]string html)
         {
             throwExceptionIfInvalidHtml(html);
 
             var banner = bannerService.UpdateBanner(id, html);
-            return new BannerViewModel(banner);
+            return new BannerModel(banner);
         }
 
         public void Delete(int id)
         {
-            unit.BannerRepository.Remove(id);
+            bannerService.RemoveBanner(id);
         }
 
         private void throwExceptionIfInvalidHtml(string html)

@@ -21,17 +21,16 @@ namespace Services
             this.unit = unitOfWork;
         }
 
-        public Banner CreateBanner(string html)
+        public Banner CreateBanner(int id, string html)
         {
             if (ValidateHtml(html).IsError)
                 throw new Exception("HTML is not valid!");
 
             var banner = new Banner()
             {
-                Id = 0,
+                Id = id,
                 Html = html,
-                Created = DateTime.Now,
-                Modified = DateTime.Now
+                Created = DateTime.Now
             };
             unit.BannerRepository.Insert(banner);
             return banner;
@@ -48,6 +47,11 @@ namespace Services
 
             unit.BannerRepository.Update(id, banner);
             return banner;
+        }
+
+        public void RemoveBanner(int id)
+        {
+            unit.BannerRepository.Remove(id);
         }
 
         public MethodResult ValidateHtml(string html)

@@ -6,15 +6,15 @@ using System.Web;
 
 namespace Web.Models.Banners
 {
-    public class BannerViewModel
+    public class BannerModel
     {
         public int? Id { get; set; }
         public string Html { get; set; }
         public DateTime? Created { get; set; }
         public DateTime? Modified { get; set; }
 
-        public BannerViewModel() { }
-        public BannerViewModel(Banner banner)
+        public BannerModel() { }
+        public BannerModel(Banner banner)
         {
             Id = banner?.Id;
             Html = banner?.Html;

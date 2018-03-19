@@ -7,16 +7,16 @@ using System.Web;
 
 namespace Web.Models.Banners
 {
-    public class BannerPageViewModel
+    public class BannerPageModel
     {
         public long Total { get; set; }
-        public List<BannerViewModel> Banners { get; set; }
+        public List<BannerModel> Banners { get; set; }
 
-        public BannerPageViewModel(Page<Banner> page)
+        public BannerPageModel(Page<Banner> page)
         {
             Total = page.Total;
             Banners = page.Items
-                .Select(item => new BannerViewModel(item))
+                .Select(item => new BannerModel(item))
                 .ToList();
         }
     }
