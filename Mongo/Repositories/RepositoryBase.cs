@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using Infrastructure.Db.Paging;
 
 namespace Mongo.Repositories
 {
@@ -40,6 +41,17 @@ namespace Mongo.Repositories
             collection.ReplaceOne(filter, model);
         }
 
+        public Page<TModel> Page(int skipCount, int pageSize)
+        {
+            long count = collection.Count(x => true);
+            return new Page<TModel>(
+                items: collection.Find(x => true)
+                .Skip(skipCount)
+                .Limit(pageSize)
+                .ToList(),
+                total: count);
+                
+        }
         public IFindFluent<TModel, TModel> Where(System.Linq.Expressions.Expression<Func<TModel, bool>> predicate)
         {
             return collection.Find(predicate);

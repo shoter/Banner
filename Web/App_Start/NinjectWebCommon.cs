@@ -1,4 +1,9 @@
-﻿using Ninject;
+﻿using Infrastructure;
+using Infrastructure.Repositories;
+using Mongo;
+using Mongo.Repositories;
+using MongoDB.Driver;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +27,8 @@ namespace Web.App_Start
 
         private static void registerServices(IKernel kernel)
         {
-           // kernel.Bind<IMongoDatabase
+            kernel.Bind<IMongoDatabase>().ToProvider<MongoDatabaseProvider>();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
         }
 
     }
