@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BannerService.cs" />
     <Compile Include="HtmlService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

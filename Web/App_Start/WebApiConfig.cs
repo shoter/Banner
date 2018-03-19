@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Web
 {
@@ -9,7 +10,9 @@ namespace Web
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
+            // Configure cors to allow everyone to use the service. I do not know what IP/Host/Domain (whatever) will use the service so I used wildcard instead.
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
 
             // Web API routes
             config.MapHttpAttributeRoutes();

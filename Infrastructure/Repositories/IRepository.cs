@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Infrastructure.Db.Paging;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace Infrastructure.Repositories
         void Remove(TKey key);
         TModel FindById(TKey id);
         IFindFluent<TModel, TModel> Where(Expression<Func<TModel, bool>> predicate);
+        Page<TModel> Page(int skipCount, int pageSize);
     }
 }

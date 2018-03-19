@@ -27,12 +27,14 @@ namespace Web.Controllers
             return new BannerViewModel(banner);
         }
 
-        public List<BannerViewModel> Get(int pageNumber, int pageSize)
+        public BannerPageViewModel Get(int pageNumber, int pageSize)
         {
-            var banners = unit.BannerRepository
+            var page = unit.BannerRepository.Page( skipCount: pageSize * (pageNumber - 1), pageSize: pageSize);
+
+            return new BannerPageViewModel(page);
         }
 
-        public BannerViewModel Post(string html)
+        public BannerViewModel Post([FromBody]string html)
         {
             throwExceptionIfInvalidHtml(html);
 
@@ -40,7 +42,7 @@ namespace Web.Controllers
             return new BannerViewModel(banner);
         }
 
-        public BannerViewModel Post(int id, string html)
+        public BannerViewModel Post(int id, [FromBody]string html)
         {
             throwExceptionIfInvalidHtml(html);
 
