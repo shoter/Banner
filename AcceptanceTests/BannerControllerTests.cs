@@ -26,7 +26,7 @@ namespace AcceptanceTests
             unit = new UnitOfWork(MongoDatabaseProvider.MongoDatabase);
             bannerService = new BannerService(unit);
             bannerController = new BannerController(unit, bannerService);
-
+            bannerController.Configuration = new HttpConfiguration();
             unit.BannerRepository.RemoveAll();
         }
 
@@ -57,6 +57,8 @@ namespace AcceptanceTests
                 Html = "<di>asdsad</div>"
             };
 
+
+            bannerController.Validate(model);
             Assert.Throws<HttpResponseException>(() => bannerController.Post(model));
         }
 
@@ -115,7 +117,8 @@ namespace AcceptanceTests
         [Fact]
         public void Update_invalidHtml_test()
         {
-            bannerService.CreateBanner(0, "<div>a</div>");
+            var html = "<div>a</div>";
+            bannerService.CreateBanner(0, html);
 
             Assert.Throws<HttpResponseException>(() => bannerController.Post(0, "<di>asdsad</div>"));
         }

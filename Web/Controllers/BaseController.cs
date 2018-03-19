@@ -33,8 +33,12 @@ namespace Web.Controllers
         [ApiExplorerSettings(IgnoreApi = true)]
         protected HttpResponseException CreateModelStateException()
         {
+            var errorList = ModelState.ToDictionary(
+            kvp => kvp.Key,
+            kvp => kvp.Value.Errors.Select(e => e.Exception?.Message?.ToString() ?? e.ErrorMessage).ToArray()
+        );
             var response = new HttpResponseMessage(HttpStatusCode.BadRequest);
-            response.Content = new ObjectContent<ModelStateDictionary>(ModelState, new JsonMediaTypeFormatter(), "application/json");
+            response.Content = new ObjectContent<Dictionary<string, string[]>>(errorList, new JsonMediaTypeFormatter(), "application/json");
             return new HttpResponseException(response);
         }
     }

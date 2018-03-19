@@ -43,7 +43,7 @@ namespace Web.Controllers
         /// <returns>Array with </returns>
         public BannerPageModel Get(int pageNumber, int pageSize)
         {
-            var page = unit.BannerRepository.Page( skipCount: pageSize * (pageNumber - 1), pageSize: pageSize);
+            var page = unit.BannerRepository.Page(skipCount: pageSize * (pageNumber - 1), pageSize: pageSize);
 
             return new BannerPageModel(page);
         }
@@ -80,14 +80,12 @@ namespace Web.Controllers
         public BannerModel Post(int id, [FromBody]string html)
         {
             ThrowExceptionIfBannerDoesNotExist(id);
-            if (ModelState.IsValid)
-            {
-                var banner = bannerService.UpdateBanner(id, html);
-                return new BannerModel(banner);
-            }
-            else
-                throw CreateModelStateException();
+            var result = bannerService.ValidateHtml(html);
+            if (result.IsError)
+                ThrowHttpException(HttpStatusCode.BadRequest, result.ToString("."));
 
+            var banner = bannerService.UpdateBanner(id, html);
+            return new BannerModel(banner);
         }
 
         /// <summary>
@@ -101,7 +99,7 @@ namespace Web.Controllers
             bannerService.RemoveBanner(id);
         }
 
-        
+
 
         /// <summary>
         /// Displays banner HTML as web page.
