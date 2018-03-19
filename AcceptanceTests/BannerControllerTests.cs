@@ -88,7 +88,7 @@ namespace AcceptanceTests
             var html = "<p>test</p>";
 
             bannerService.CreateBanner(0, "<div>divvvv</div>");
-            var response = bannerController.Post(0, html);
+            var response = bannerController.Put(0, html);
 
             Assert.Equal(0, response.Id);
             Assert.Equal(html, response.Html);
@@ -104,7 +104,7 @@ namespace AcceptanceTests
             var html = "<p>test</p>";
 
             bannerService.CreateBanner(0, "<div>divvvv</div>");
-            bannerController.Post(0, html);
+            bannerController.Put(0, html);
             var data = unit.BannerRepository.FindById(0);
 
             Assert.Equal(0, data.Id);
@@ -120,7 +120,7 @@ namespace AcceptanceTests
             var html = "<div>a</div>";
             bannerService.CreateBanner(0, html);
 
-            Assert.Throws<HttpResponseException>(() => bannerController.Post(0, "<di>asdsad</div>"));
+            Assert.Throws<HttpResponseException>(() => bannerController.Put(0, "<di>asdsad</div>"));
         }
 
         [Fact]
