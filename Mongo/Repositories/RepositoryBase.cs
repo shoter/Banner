@@ -12,7 +12,7 @@ using Infrastructure.DataModels;
 namespace Mongo.Repositories
 {
     public abstract class RepositoryBase<TModel, TKey> : IRepository<TModel, TKey>
-        where TModel : IEntity
+        where TModel : IKeyedEntity<TKey>
     {
         private IMongoCollection<TModel> collection;
         public RepositoryBase(IMongoCollection<TModel> collection)
@@ -49,6 +49,7 @@ namespace Mongo.Repositories
             long count = collection.Count(x => true);
             return new Page<TModel>(
                 items: collection.Find(x => true)
+                .SortBy(x => x.Id)
                 .Skip(skipCount)
                 .Limit(pageSize)
                 .ToList(),

@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
 using Web.Models.Banners;
@@ -36,7 +38,7 @@ namespace Web.Controllers
 
         public BannerModel Post([FromBody]NewBannerModel newBanner)
         {
-            throwExceptionIfInvalidHtml(newBanner.Html);
+            throwExceptionIfInvalidHtml(newBanner?.Html);
 
             var banner = bannerService.CreateBanner(newBanner.Id, newBanner.Html);
             return new BannerModel(banner);
@@ -53,6 +55,17 @@ namespace Web.Controllers
         public void Delete(int id)
         {
             bannerService.RemoveBanner(id);
+        }
+
+        [Route("Api/Banner/Render/{id:int}")]
+        [HttpGet]
+        public HttpResponseMessage Render(int id)
+        {
+            var banner = unit.BannerRepository.FindById(id);
+            var response = new HttpResponseMessage();
+            response.Content = new StringContent(banner.Html);
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
+            return response;
         }
 
         private void throwExceptionIfInvalidHtml(string html)

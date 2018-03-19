@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.DataModels
 {
-    public class Banner : IEntity
+    public class Banner : IKeyedEntity<int>
     {
         public int Id { get; set; }
         public string Html { get; set; }

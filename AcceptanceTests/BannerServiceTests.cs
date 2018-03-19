@@ -11,6 +11,7 @@ using Xunit;
 
 namespace AcceptanceTests
 {
+    [Collection("Non-parallel")]
     public class BannerServiceTests
     {
         private readonly IUnitOfWork unit;

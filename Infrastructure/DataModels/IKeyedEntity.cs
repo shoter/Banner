@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestsCommon
+namespace Infrastructure.DataModels
 {
-    public class Class1
+    public interface IKeyedEntity<TKey> : IEntity
     {
+        TKey Id { get; set; }
     }
 }

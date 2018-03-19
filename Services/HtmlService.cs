@@ -12,6 +12,9 @@ namespace Services
     {
         public bool IsValidHtml(string html)
         {
+            if (html == null)
+                return false;
+
             var doc = new HtmlDocument();
             doc.LoadHtml(html);
 
