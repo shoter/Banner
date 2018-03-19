@@ -18,7 +18,11 @@ namespace Infrastructure.Repositories
         void Remove(TKey key);
         TModel FindById(TKey id);
         IFindFluent<TModel, TModel> Where(Expression<Func<TModel, bool>> predicate);
+        /// <summary>
+        /// Returns paginated data in ascending order
+        /// </summary>
         Page<TModel> Page(int skipCount, int pageSize);
+        bool Exists(TKey id);
         void RemoveAll();
     }
 }

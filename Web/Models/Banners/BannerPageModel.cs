@@ -9,7 +9,13 @@ namespace Web.Models.Banners
 {
     public class BannerPageModel
     {
+        /// <summary>
+        /// Total number of banners held by service
+        /// </summary>
         public long Total { get; set; }
+        /// <summary>
+        /// List of banners on this page
+        /// </summary>
         public List<BannerModel> Banners { get; set; }
 
         public BannerPageModel(Page<Banner> page)

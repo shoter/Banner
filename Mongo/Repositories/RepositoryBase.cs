@@ -56,6 +56,13 @@ namespace Mongo.Repositories
                 total: count);
                 
         }
+
+        public bool Exists(TKey id)
+        {
+            return collection.Find(createIdFilter(id))
+                .Any();
+        }
+
         public IFindFluent<TModel, TModel> Where(System.Linq.Expressions.Expression<Func<TModel, bool>> predicate)
         {
             return collection.Find(predicate);

@@ -8,9 +8,18 @@ namespace Web.Models.Banners
 {
     public class BannerModel
     {
+        /// <summary>
+        /// Unique banner id
+        /// </summary>
         public int? Id { get; set; }
         public string Html { get; set; }
+        /// <summary>
+        /// Date of banner creation
+        /// </summary>
         public DateTime? Created { get; set; }
+        /// <summary>
+        /// Date of last banner modification
+        /// </summary>
         public DateTime? Modified { get; set; }
 
         public BannerModel() { }
