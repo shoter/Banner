@@ -58,7 +58,7 @@ namespace Web.Controllers
 
             if (ModelState.IsValid)
             {
-                var banner = bannerService.CreateBanner(newBanner.Id, newBanner.Html);
+                var banner = bannerService.CreateBanner(newBanner.Id.Value, newBanner.Html);
                 return new BannerModel(banner);
             }
             else
@@ -77,7 +77,7 @@ namespace Web.Controllers
         /// <param name="id">Banner's Id</param>
         /// <param name="html">new html content</param>
         /// <returns>Updated banner data with new modification date.</returns>
-        public BannerModel Post(int id, [FromBody]string html)
+        public BannerModel Put(int id, [FromBody]string html)
         {
             ThrowExceptionIfBannerDoesNotExist(id);
             var result = bannerService.ValidateHtml(html);

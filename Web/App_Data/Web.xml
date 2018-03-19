@@ -502,7 +502,7 @@
             </summary>
             <returns>New banner data with creation date.</returns>
         </member>
-        <member name="M:Web.Controllers.BannerController.Post(System.Int32,System.String)">
+        <member name="M:Web.Controllers.BannerController.Put(System.Int32,System.String)">
             <summary>
             Updates banner with given Id
             </summary>
