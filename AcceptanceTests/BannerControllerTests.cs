@@ -24,7 +24,7 @@ namespace AcceptanceTests
         public BannerControllerTests()
         {
             unit = new UnitOfWork(MongoDatabaseProvider.MongoDatabase);
-            bannerService = new BannerService(unit, new HtmlService());
+            bannerService = new BannerService(unit);
             bannerController = new BannerController(unit, bannerService);
 
             unit.BannerRepository.RemoveAll();

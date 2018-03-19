@@ -233,6 +233,7 @@
     </Compile>
     <Compile Include="Models\Banners\BannerPageModel.cs" />
     <Compile Include="Models\Banners\BannerModel.cs" />
+    <Compile Include="Models\Banners\BannerValidatedBaseModel.cs" />
     <Compile Include="Models\Banners\NewBannerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Common.Validators;
+using Moq;
 using Services;
 using System;
 using System.Collections.Generic;
@@ -9,24 +10,15 @@ using Xunit;
 
 namespace UnitTests.Services
 {
-    public class HtmlServiceTests
+    public class HtmlValidatorTests
     {
-        private HtmlService htmlService => mockHtmlService.Object;
-        private Mock<HtmlService> mockHtmlService = new Mock<HtmlService>();
-
-        public HtmlServiceTests()
-        {
-            mockHtmlService = new Mock<HtmlService>();
-            mockHtmlService.CallBase = true;
-        }
-
         [Theory]
         [InlineData("<span>test</span>")]
         [InlineData("<div><h4>title</h4></div>")]
         [InlineData("<div>test</div>")]
         public void IsValidHtml_valid_tests(string html)
         {
-            Assert.True(htmlService.IsValidHtml(html));
+            Assert.True(HtmlValidator.IsValidHtml(html));
         }
 
         [Theory]
@@ -35,7 +27,7 @@ namespace UnitTests.Services
         [InlineData("<div>test<span></div></span>")]
         public void IsValidHtml_invalid_tests(string html)
         {
-            Assert.False(htmlService.IsValidHtml(html));
+            Assert.False(HtmlValidator.IsValidHtml(html));
         }
     }
 }

@@ -32,7 +32,6 @@ namespace Web.App_Start
             kernel.Bind<IMongoDatabase>().ToProvider<MongoDatabaseProvider>();
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
             kernel.Bind<IBannerService>().To<BannerService>();
-            kernel.Bind<IHtmlService>().To<HtmlService>();
         }
 
     }

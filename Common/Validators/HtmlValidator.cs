@@ -1,16 +1,15 @@
 ﻿using HtmlAgilityPack;
-using Infrastructure.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+namespace Common.Validators
 {
-    public class HtmlService : IHtmlService
+    public static class HtmlValidator
     {
-        public bool IsValidHtml(string html)
+        public static bool IsValidHtml(string html)
         {
             if (html == null)
                 return false;

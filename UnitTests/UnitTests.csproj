@@ -53,14 +53,28 @@
     <Reference Include="Moq, Version=4.8.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.8.2\lib\net45\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\packages\xunit.abstractions.2.0.1\lib\net35\xunit.abstractions.dll</HintPath>
@@ -76,16 +90,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BannerControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\HtmlServiceTests.cs" />
+    <Compile Include="Services\HtmlValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{3a43c26c-1db2-4bf0-80eb-458f4fd573ac}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{133ac9d6-2ac4-4d4b-861c-b82bfc1c5ab7}</Project>
+      <Name>Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{A132EB53-1193-4ADF-9000-CCB30EACCA8F}</Project>
@@ -94,6 +114,10 @@
     <ProjectReference Include="..\TestsCommon\TestsCommon.csproj">
       <Project>{9bf7113c-8a5c-45e4-953f-4fd6b39f0656}</Project>
       <Name>TestsCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web\Web.csproj">
+      <Project>{4443A74E-0FD1-4BC0-B21A-437C329F602F}</Project>
+      <Name>Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

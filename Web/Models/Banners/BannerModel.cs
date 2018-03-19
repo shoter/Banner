@@ -6,13 +6,12 @@ using System.Web;
 
 namespace Web.Models.Banners
 {
-    public class BannerModel
+    public class BannerModel : BannerValidatedBaseModel
     {
         /// <summary>
         /// Unique banner id
         /// </summary>
         public int? Id { get; set; }
-        public string Html { get; set; }
         /// <summary>
         /// Date of banner creation
         /// </summary>

@@ -5,12 +5,11 @@ using System.Web;
 
 namespace Web.Models.Banners
 {
-    public class NewBannerModel
+    public class NewBannerModel : BannerValidatedBaseModel
     {
         /// <summary>
         /// Id number of new banner. Must be unique.
         /// </summary>
         public int Id { get; set; }
-        public string Html { get; set; }
     }
 }

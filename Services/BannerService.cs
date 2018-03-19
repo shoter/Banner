@@ -7,17 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.DataModels;
 using Infrastructure;
+using Common.Validators;
 
 namespace Services
 {
     public class BannerService : IBannerService
     {
-        private readonly IHtmlService htmlService;
         private readonly IUnitOfWork unit;
 
-        public BannerService(IUnitOfWork unitOfWork, IHtmlService htmlService)
+        public BannerService(IUnitOfWork unitOfWork)
         {
-            this.htmlService = htmlService;
             this.unit = unitOfWork;
         }
 
@@ -56,7 +55,7 @@ namespace Services
 
         public MethodResult ValidateHtml(string html)
         {
-            if (htmlService.IsValidHtml(html) == false)
+            if (HtmlValidator.IsValidHtml(html) == false)
                 return new MethodResult("HTML for this banner is not valid!");
 
             return MethodResult.Success;

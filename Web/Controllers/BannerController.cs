@@ -55,10 +55,14 @@ namespace Web.Controllers
         public BannerModel Post([FromBody]NewBannerModel newBanner)
         {
             throwExceptionIfBannerExists(newBanner?.Id);
-            throwExceptionIfInvalidHtml(newBanner?.Html);
 
-            var banner = bannerService.CreateBanner(newBanner.Id, newBanner.Html);
-            return new BannerModel(banner);
+            if (ModelState.IsValid)
+            {
+                var banner = bannerService.CreateBanner(newBanner.Id, newBanner.Html);
+                return new BannerModel(banner);
+            }
+            else
+                throw CreateModelStateException();
         }
 
         private void throwExceptionIfBannerExists(int? id)
@@ -75,11 +79,15 @@ namespace Web.Controllers
         /// <returns>Updated banner data with new modification date.</returns>
         public BannerModel Post(int id, [FromBody]string html)
         {
-            throwExceptionIfBannerDoesNotExist(id);
-            throwExceptionIfInvalidHtml(html);
+            ThrowExceptionIfBannerDoesNotExist(id);
+            if (ModelState.IsValid)
+            {
+                var banner = bannerService.UpdateBanner(id, html);
+                return new BannerModel(banner);
+            }
+            else
+                throw CreateModelStateException();
 
-            var banner = bannerService.UpdateBanner(id, html);
-            return new BannerModel(banner);
         }
 
         /// <summary>
@@ -88,16 +96,12 @@ namespace Web.Controllers
         /// <param name="id">Id of banner to remove</param>
         public void Delete(int id)
         {
-            throwExceptionIfBannerDoesNotExist(id);
+            ThrowExceptionIfBannerDoesNotExist(id);
 
             bannerService.RemoveBanner(id);
         }
 
-        private void throwExceptionIfBannerDoesNotExist(int id)
-        {
-            if (unit.BannerRepository.Exists(id) == false)
-                ThrowHttpException(HttpStatusCode.Conflict, "Banner does not exist!");
-        }
+        
 
         /// <summary>
         /// Displays banner HTML as web page.
@@ -115,11 +119,10 @@ namespace Web.Controllers
             return response;
         }
 
-        private void throwExceptionIfInvalidHtml(string html)
+        public virtual void ThrowExceptionIfBannerDoesNotExist(int id)
         {
-            var result = bannerService.ValidateHtml(html);
-            if (result.IsError)
-                ThrowHttpException(HttpStatusCode.BadRequest, result.ToString());
+            if (unit.BannerRepository.Exists(id) == false)
+                ThrowHttpException(HttpStatusCode.Conflict, "Banner does not exist!");
         }
     }
 }

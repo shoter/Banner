@@ -68,7 +68,6 @@
     <Compile Include="Repositories\IBannerRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Services\IBannerService.cs" />
-    <Compile Include="Services\IHtmlService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
